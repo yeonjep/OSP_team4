@@ -1,0 +1,61 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import re
+import requests
+from bs4 import BeautifulSoup
+from flask import Flask, render_template
+
+# 일본 날씨
+
+if __name__ == '__main__':
+    url = u'https://weather.com/weather/tenday/l/4ba28384e2da53b2861f5b5c70b7332e4ba1dc83e75b948e6fbd2aaceeeceae3'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+
+    res1 = soup.find_all(
+        'div', class_='DetailsSummary--DetailsSummary--2HluQ DetailsSummary--fadeOnOpen--vFCc_')
+
+    list_date = []
+    list_high_temp_F = []
+    list_low_temp_F = []
+    list_high_temp_C = []
+    list_low_temp_C = []
+    list_rain = []
+
+    cnt = 1
+    for idx in res1:
+        if (idx == None):
+            break
+        if (cnt == 11):
+            break
+        list_date.append(idx.find('h3').text)
+        list_high_temp_F.append(
+            idx.find(class_='DetailsSummary--highTempValue--3Oteu').text)
+        list_low_temp_F.append(
+            idx.find(class_='DetailsSummary--lowTempValue--3H-7I').text)
+        tmp = idx.find('div', class_='DetailsSummary--precip--1ecIJ')
+        list_rain.append(tmp.find('span').text)
+        cnt = cnt+1
+
+    print(list_date)
+    # print(list_high_temp_F)
+    # print(list_low_temp_F)
+    print(list_rain)
+
+    for idx in list_high_temp_F:
+        idx = ''.join(e for e in idx if e.isalnum())
+        i = int(idx)
+        tmp = (i-32)*5/9
+        tmp = int(tmp)
+        list_high_temp_C.append(tmp)
+
+    for idx in list_low_temp_F:
+        idx = ''.join(e for e in idx if e.isalnum())
+        i = int(idx)
+        tmp = (i-32)*5/9
+        tmp = int(tmp)
+        list_low_temp_C.append(tmp)
+
+    print(list_high_temp_C)
+    print(list_low_temp_C)
