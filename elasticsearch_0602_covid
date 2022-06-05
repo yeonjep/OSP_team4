@@ -12,7 +12,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def func(url):
-    url = u'https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600'
+    #url = u'https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600'
     res = requests.get(url)
     soup = BeautifulSoup(res.content, "html.parser")
 
