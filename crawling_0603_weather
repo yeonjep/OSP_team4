@@ -39,23 +39,30 @@ if __name__ == '__main__':
         cnt = cnt+1
 
     print(list_date)
-    # print(list_high_temp_F)
-    # print(list_low_temp_F)
+    print(list_high_temp_F)
+    print(list_low_temp_F)
     print(list_rain)
 
     for idx in list_high_temp_F:
+        if idx == "--":
+            list_high_temp_C.append(idx)
+            continue
         idx = ''.join(e for e in idx if e.isalnum())
-        i = int(idx)
+        i = float(idx)
         tmp = (i-32)*5/9
         tmp = int(tmp)
         list_high_temp_C.append(tmp)
 
+    print(list_high_temp_C)
+
     for idx in list_low_temp_F:
+        if idx == "--":
+            list_high_temp_C.append(idx)
+            continue
         idx = ''.join(e for e in idx if e.isalnum())
-        i = int(idx)
+        i = float(idx)
         tmp = (i-32)*5/9
         tmp = int(tmp)
         list_low_temp_C.append(tmp)
 
-    print(list_high_temp_C)
     print(list_low_temp_C)
