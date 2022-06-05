@@ -1,0 +1,85 @@
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
+import re
+import requests
+import sys
+from elasticsearch import Elasticsearch
+
+from bs4 import BeautifulSoup
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+def func(url):
+    url = u'https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+
+    global list1
+    global list2
+    global list3
+    global list4
+    global list5
+    global res2
+    
+    res1 = soup.find_all('div', class_='contTit')
+    i = 1
+    for idx in res1:
+        if (i == 2):
+            res2 = idx.text
+            break
+        i = i+1
+
+    tb = soup.find('table', class_='lineTop_tb2')
+    tb1 = tb.find('tbody')
+
+
+    list1 = []
+    list2 = []
+    list3 = []
+    list4 = []
+    list5 = []
+
+    for link in tb1.find_all('tr'):
+        name = link.find_all('td')
+        if (name == None):
+            break
+        cnt = 0
+        for a in name:
+            if(cnt == 0):
+                list1.append(a.text)
+            elif(cnt == 1):
+                list2.append(a.text)
+            elif(cnt == 2):
+                list3.append(a.text)
+            elif(cnt == 3):
+                list4.append(a.text)
+            elif(cnt == 4):
+                list5.append(a.text)
+
+            cnt = cnt+1    
+   
+    e1={
+      "list1":list1,
+      "list2":list2,
+      "list3":list3,
+      "list4":list4,
+      "list5":list5,
+      "res2":res2
+       }
+                  
+    es_host="http://localhost:9200"      
+    es = Elasticsearch(es_host)
+   
+    es.index(index='web', id=1, document=e1)         
+         
+
+@app.route('/')
+def home():
+   func("https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+   return render_template("test.html", list1=list1, list2=list2, list3=list3, list4=list4, list5=list5, res2=res2)
+   
+      
+if __name__=='__main__':
+   app.run()
