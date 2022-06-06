@@ -1,0 +1,101 @@
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
+import re
+import requests
+import sys
+from elasticsearch import Elasticsearch
+
+from bs4 import BeautifulSoup
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+def func(url):
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+
+    global list11
+    global list21
+    global list31
+    global list41
+    global list51
+    global res21
+    
+    res1 = soup.find_all('div', class_='contTit')
+    i = 1
+    for idx in res1:
+        if (i == 2):
+            res2 = idx.text
+            break
+        i = i+1
+
+    tb = soup.find('table', class_='lineTop_tb2')
+    tb1 = tb.find('tbody')
+
+
+    list1 = []
+    list2 = []
+    list3 = []
+    list4 = []
+    list5 = []
+    
+    list11 = []
+    list21 = []
+    list31 = []
+    list41 = []
+    list51 = []
+
+    for link in tb1.find_all('tr'):
+        name = link.find_all('td')
+        if (name == None):
+            break
+        cnt = 0
+        for a in name:
+            if(cnt == 0):
+                list1.append(a.text)
+            elif(cnt == 1):
+                list2.append(a.text)
+            elif(cnt == 2):
+                list3.append(a.text)
+            elif(cnt == 3):
+                list4.append(a.text)
+            elif(cnt == 4):
+                list5.append(a.text)
+
+            cnt = cnt+1    
+   
+    e1={
+      "list1":list1,
+      "list2":list2,
+      "list3":list3,
+      "list4":list4,
+      "list5":list5,
+      "res2":res2
+       }
+                  
+    es_host="http://localhost:9200"      
+    es = Elasticsearch(es_host)
+   
+    es.index(index='covid', id=1, document=e1)      
+    
+    data1 = es.search(index="covid", body={"query":{"match_all":{}}})
+    if data1['hits']['total']['value']>0:
+       for doc in data1['hits']['hits']:
+          data=doc['_source']
+          list11=data['list1']
+          list21=data['list2']
+          list31=data['list3']
+          list41=data['list4']   
+          list51=data['list5'] 
+          res21=data['res2']
+         
+
+@app.route('/')
+def home():
+   func("https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+   return render_template("test.html", list1=list11, list2=list21, list3=list31, list4=list41, list5=list51, res2=res21)
+   
+      
+if __name__=='__main__':
+   app.run()
