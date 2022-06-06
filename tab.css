@@ -6,14 +6,14 @@
 
 ul {
     list-style: none;
-    
+
 }
 
 .tabmenu {
     max-width: 3000px;
     margin: 0 auto;
     position: relative;
- 
+
 }
 
 .tabmenu ul li {
@@ -53,4 +53,51 @@ ul {
 
 .tabmenu input:checked~.tabCon {
     display: block;
+}
+
+#wrap {
+    margin: 0 auto;
+    text-align: center;
+    width: 300px;
+}
+
+.title {
+    line-height: 1;
+    color: red;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 200px;
+    height: 120px;
+    transition: 0.5s all
+}
+
+.title h3 {
+    font-size: 30px;
+    margin: 0
+}
+
+.title p {
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.more {
+    display: block;
+    font-size: 18x;
+    color: #fff;
+    background: red;
+    line-height: 40px;
+    width: 120px;
+    margin-top: 30px;
+    opacity: 0;
+    transition: 0.5s all
+}
+
+#wrap:hover .more {
+    opacity: 1
+}
+
+#wrap:hover .title {
+    top: 150px
 }
