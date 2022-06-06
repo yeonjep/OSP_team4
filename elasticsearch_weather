@@ -1,0 +1,102 @@
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
+import re
+import requests
+import sys
+from elasticsearch import Elasticsearch
+
+from bs4 import BeautifulSoup
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+def func(url):
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+
+    global list_date1
+    global list_rain1
+    global list_high_temp_C1
+    global list_low_temp_C1
+    
+    res1 = soup.find_all(
+        'div', class_='DetailsSummary--DetailsSummary--2HluQ DetailsSummary--fadeOnOpen--vFCc_')
+
+    list_date = []
+    list_rain = []
+    list_high_temp_F = []
+    list_low_temp_F = []
+    list_high_temp_C = []
+    list_low_temp_C = []
+    
+    list_date1 = []
+    list_rain1 = []
+    list_high_temp_C1 = []
+    list_low_temp_C1 = []
+
+    cnt = 1
+    for idx in res1:
+        if (idx == None):
+            break
+        if (cnt == 11):
+            break
+        list_date.append(idx.find('h3').text)
+        list_high_temp_F.append(
+            idx.find(class_='DetailsSummary--highTempValue--3Oteu').text)
+        list_low_temp_F.append(
+            idx.find(class_='DetailsSummary--lowTempValue--3H-7I').text)
+        tmp = idx.find('div', class_='DetailsSummary--precip--1ecIJ')
+        list_rain.append(tmp.find('span').text)
+        cnt = cnt+1
+        
+    for idx in list_high_temp_F:
+        if idx == "--":
+            list_high_temp_C.append(27)
+            continue
+        idx = ''.join(e for e in idx if e.isalnum())
+        i = float(idx)
+        tmp = (i-32)*5/9
+        tmp = int(tmp)
+        list_high_temp_C.append(tmp)
+
+    for idx in list_low_temp_F:
+        if idx == "--":
+            list_high_temp_C.append(27)
+            continue
+        idx = ''.join(e for e in idx if e.isalnum())
+        i = float(idx)
+        tmp = (i-32)*5/9
+        tmp = int(tmp)
+        list_low_temp_C.append(tmp)
+  
+    e2={
+      "date":list_date,
+      "rain":list_rain,
+      "high_temp":list_high_temp_C,
+      "low_temp":list_low_temp_C
+       }
+                  
+    es_host="http://localhost:9200"      
+    es = Elasticsearch(es_host)
+   
+    es.index(index='weather', id=2, document=e2) 
+
+    
+    data1 = es.search(index="weather", body={"query":{"match_all":{}}})
+    if data1['hits']['total']['value']>0:
+       for doc in data1['hits']['hits']:
+          data=doc['_source']
+          list_date1=data['date']
+          list_rain1=data['rain']
+          list_high_temp_C1=data['high_temp']
+          list_low_temp_C1=data['low_temp']
+         
+@app.route('/')
+def home():
+   func("https://weather.com/weather/tenday/l/4ba28384e2da53b2861f5b5c70b7332e4ba1dc83e75b948e6fbd2aaceeeceae3")
+   return render_template("test2.html", list1=list_date1, list2=list_rain1, list3=list_high_temp_C1, list4=list_low_temp_C1)
+   
+      
+if __name__=='__main__':
+   app.run()
