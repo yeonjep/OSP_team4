@@ -1,66 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta charset="UTF-8" />
+    <title>
+        {{list_vacci}}{{list_notvacci}}{{list_prov}}{{list_coronatest}}{{list_else}}{{list_updatedate}}
+        {{list_date}}{{list_temph}}{{list_templ}}{{list_rain}}
+    </title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- <link type="text/css" href="tab.css" rel="stylesheet" media="screen,projection"> -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}">
+    <!-- <link rel="stylesheet" href="tab.css"> -->
+
 </head>
+
 <body>
-   <p style="font-size:30px"><span style="background-color:#D1CECE">사이판(Saipan)</span> <b>방역정책현황</b> (00.0.0 기준)</p>
-   <br>
-   <li>코로나 19관련 국가별 방역정책 현황은 정보 제공을 목적으로 하며, 승객의 출입국을 보장하지 않습니다.</li><br>
-   <li>국가/지역별 정책현황이 수시로 변경되고 있음으로 아래 내용 또한 변경될 수 있습니다.</li><br>
-   <table border="1" align="center"  width ="1000" height="180">
-      <tr bgcolor="#FBC5A4" align="center">
-         <td colspan="2">한국인 여행자 격리여부</td>
-         <td rowspan="2">코로나 음성 확인서</td>
-         <td rowspan="2">현지 코로나 검사 (접종완료자 기준)</td>
-         <td rowspan="2">비고</td>
-      </tr>
-      <tr bgcolor="#FBC5A4" align="center">
-          <td>접종완료자</td>
-          <td>미접종자</td>
-      </tr>
-      <tr align="center">
-          <td>00</td>
-          <td>00</td>
-          <td>00</td>
-          <td>00</td>
-          <td>00</td>
-      </tr>
-   </table>
-   <br><br>
-   <table border="1"align="center"  width ="1000" height="180">
-      <tr bgcolor="#EEE5FF" align="center">
-      <td>누적확진자</td>
-      <td>신규확진자</td>
-      <td>사망률(수)</td>
-      </tr>
-      <tr align="center">
-         <td>000</td>
-         <td>
-         <script>
-            if ( 0 ) 
-              document.write ( '<p><span style="color:red">000▲</span></p>' );
-            else 
-              document.write ( '<p><span style="color:red">-</span></p>' );
-          </script>
-          </td>
-          <td>000%<br>(000)</td>
-      </tr>
-   </table>
-   <br><br>
-   <table border="1" align="center"  width ="1000" height="180">
-      <tr bgcolor="#D1F3FB" align="center">
-         <td colspan="2">백신접종현황 (0.00 기준)</td>
-      </tr>
-      <tr bgcolor="#D1F3FB" align="center">
-         <td>최소 1회 이상 접종</td>
-         <td>접종 완료</td>
-      </tr>
-      <tr align="center">
-         <td>00%<br><span style="color:blue">000</span></td>
-         <td>00%<br><span style="color:blue">000</span></td>
-      </tr>
-   </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="tabmenu">
+        <ul>
+            <li id="tab1" class="btnCon"> <input type="radio" checked name="tabmenu" id="tabmenu1">
+                <label for="tabmenu1">방역</label>
+                <div class="tabCon">
+                    <p style="font-size:30px"><span style="background-color:#D1CECE; font-size:30px">사이판(saipan)</span>
+                        <b>방역정책현황</b>
+                        ({{list_updatedate}} 기준)
+                    </p>
+                    <br><br><br>
+                    <br>• 코로나 19관련 국가별 방역정책 현황은 정보 제공을 목적으로 하며, 승객의 출입국을 보장하지 않습니다.
+                    <br>• 국가/지역별 정책현황이 수시로 변경되고 있음으로 아래 내용 또한 변경될 수 있습니다.<br><br><br>
+                    <table border="1" align="center" width="3000" height="180">
+                        <tr bgcolor="#FBC5A4" align="center">
+                            <td colspan="2">한국인 여행자 격리여부</td>
+                            <td rowspan="2">코로나 음성 확인서</td>
+                            <td rowspan="2">현지 코로나 검사 (접종완료자 기준)</td>
+                            <td rowspan="2">비고</td>
+                        </tr>
+                        <tr bgcolor="#FBC5A4" align="center">
+                            <td>접종완료자</td>
+                            <td>미접종자</td>
+                        </tr>
+                        <tr align="center">
+                            <td>{{list_vacci.1}}</td>
+                            <td>{{list_notvacci.1}}</td>
+                            <td>{{list_prov.1}}</td>
+                            <td>{{list_coronatest.1}}</td>
+                            <td>{{list_else.1}}</td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <table border="1" align="center" width="1000" height="180">
+                        <tr bgcolor="#EEE5FF" align="center">
+                            <td>누적확진자</td>
+                            <td>신규확진자</td>
+                            <td>사망률(수)</td>
+                        </tr>
+                        <tr align="center">
+                            <td>000</td>
+                            <td>
+                                <script>
+                                    if (0)
+                                        document.write('<p><span style="color:red">000▲</span></p>');
+                                    else
+                                        document.write('<p><span style="color:red">-</span></p>');
+                                </script>
+                            </td>
+                            <td>000%<br>(000)</td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <table border="1" align="center" width="1000" height="180">
+                        <tr bgcolor="#D1F3FB" align="center">
+                            <td colspan="2">백신접종현황 (0.00 기준)</td>
+                        </tr>
+                        <tr bgcolor="#D1F3FB" align="center">
+                            <td>최소 1회 이상 접종</td>
+                            <td>접종 완료</td>
+                        </tr>
+                        <tr align="center">
+                            <td>00%<br><span style="color:blue">000</span></td>
+                            <td>00%<br><span style="color:blue">000</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </li>
+            <li id="tab2" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu2">
+                <label for="tabmenu2">날씨</label>
+
+                <div class="tabCon">
+                    10 Day Weather
+
+                    <style type="text/css">
+                        .tg {
+                            border: none;
+                            border-collapse: collapse;
+                            border-color: #ccc;
+                            border-spacing: 0;
+                        }
+
+                        .tg td {
+                            background-color: #fff;
+                            border-color: #ccc;
+                            border-style: solid;
+                            border-width: 0px;
+                            color: #333;
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            overflow: hidden;
+                            padding: 13px 20px;
+                            word-break: normal;
+                        }
+
+                        .tg th {
+                            background-color: #f0f0f0;
+                            border-color: #ccc;
+                            border-style: solid;
+                            border-width: 0px;
+                            color: #333;
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            font-weight: normal;
+                            overflow: hidden;
+                            padding: 13px 20px;
+                            word-break: normal;
+                        }
+
+                        .tg .tg-6if2 {
+                            background-color: #c0c0c0;
+                            border-color: inherit;
+                            font-family: "Times New Roman", Times, serif !important;
+                            font-size: 24px;
+                            text-align: left;
+                            vertical-align: top
+                        }
+
+                        .tg .tg-kx6z {
+                            background-color: #ffffff;
+                            border-color: inherit;
+                            font-family: "Arial Black", Gadget, sans-serif !important;
+                            text-align: left;
+                            vertical-align: top
+                        }
+
+                        .tg .tg-c6of {
+                            background-color: #ffffff;
+                            border-color: inherit;
+                            text-align: left;
+                            vertical-align: top
+                        }
+
+                        .tg .tg-0pky {
+                            border-color: inherit;
+                            text-align: left;
+                            vertical-align: top
+                        }
+                    </style>
+                    <table class="tg">
+                        <thead>
+                            <tr>
+                                <th class="tg-6if2">Date</th>
+                                <th class="tg-6if2">temperatures</th>
+                                <th class="tg-6if2"></th>
+                                <th class="tg-6if2">rainfall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tg-c6of"> {{list_date.0}}</td>
+                                <td class="tg-c6of">{{list_temph.0}}°c/{{list_templ.0}}°c</td>
+                                <td class="tg-c6of"><img
+                                        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23feb02a' d='M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z'/%3e%3c/svg%3e"
+                                        alt="Image" width="30" height="30"></td>
+                                <td class="tg-kx6z">{{list_rain.0}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">
+                                    {{list_date.1}}
+                                </td>
+                                <td class="tg-0pky">{{list_temph.1}}°c/{{list_templ.1}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.1}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.2}}</td>
+                                <td class="tg-0pky">{{list_temph.2}}°c/{{list_templ.2}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.2}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.3}}</td>
+                                <td class="tg-0pky">{{list_temph.3}}°c/{{list_templ.3}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.3}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.4}}</td>
+                                <td class="tg-0pky">{{list_temph.4}}°c/{{list_templ.4}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.4}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.5}}</td>
+                                <td class="tg-0pky">{{list_temph.5}}°c/{{list_templ.5}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.5}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.6}}</td>
+                                <td class="tg-0pky">{{list_temph.6}}°c/{{list_templ.6}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.6}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.7}}</td>
+                                <td class="tg-0pky">{{list_temph.7}}°c/{{list_templ.7}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.7}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.8}}</td>
+                                <td class="tg-0pky">{{list_temph.8}}°c/{{list_templ.8}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.8}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0pky">{{list_date.9}}</td>
+                                <td class="tg-0pky">{{list_temph.9}}°c/{{list_templ.9}}°c</td>
+                                <td class="tg-0pky"></td>
+                                <td class="tg-0pky">{{list_rain.9}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </li>
+            <li id="tab3" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu3">
+                <label for="tabmenu3">정보</label>
+                <div class="tabCon">
+
+                    <div id="wrap">
+                        <img src="https://picsum.photos/300/600">
+                        <div class="title">
+                            <h3>타이틀</h3>
+                            <p>부연설명</p>
+                            <a href="" class="more">MORE VIEW</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </li>
+        </ul>
+    </div>
+    <!--tab-->
 </body>
-</html>
-</body>
+
 </html>
