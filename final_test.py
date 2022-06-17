@@ -48,18 +48,30 @@ for num in view_list:
 	num_list = num.split()
 	view_num_list.append(num_list[0])
 
-#print(view_num_list)
-
 for i in range(len(view_num_list)):
-    if (view_num_list[i] == ''):
-        view_num_list[i] = '0'
-    else:
-        continue
+	if(view_num_list[i] == 'N' or view_num_list[i]=='No'):
+		view_num_list[i] = '0'
+	else:
+		continue
+
+        
 #only numbers....
 view_only_num_list = []
 for views in view_num_list:
 	view_only_num_list.append(views[:-1])
+
+#for i in range(len(view_only_num_list):
+	#if(view_only_num_list == 'N'):
+		#view_only_num_list[i] = '0'
+	#else:
+		#continue
+for i in range(len(view_num_list)):
+	if(view_only_num_list[i] == ''):
+		view_only_num_list[i] = '0'
+	else:
+		continue	
 print(view_only_num_list)
+
 
 million_billion_list = []
 for word in view_num_list:
@@ -77,7 +89,7 @@ for i in range(len(million_billion_list)):
         million_billion_list[i] = '1000000'
     else:
         million_billion_list[i] = '1'
-print(million_billion_list)
+#print(million_billion_list)
 result_list = []
 for i in range(len(million_billion_list)):
    result = 0
