@@ -2,264 +2,101 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>
-        {{list_vacci}}{{list_notvacci}}{{list_prov}}{{list_coronatest}}{{list_else}}{{list_updatedate}}
-        {{list_date}}{{list_temph}}{{list_templ}}{{list_rain}}
-    </title>
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- <link type="text/css" href="tab.css" rel="stylesheet" media="screen,projection"> -->
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}">
-    <!-- <link rel="stylesheet" href="tab.css"> -->
-
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>East Asia Traveling for Korea</title>
+        <style>
+                #b1 {
+                        width: 229.5px;
+                        height: 150px;
+                }
+        </style>
 </head>
 
-<body>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="tabmenu">
-        <ul>
-            <li id="tab1" class="btnCon"> <input type="radio" checked name="tabmenu" id="tabmenu1">
-                <label for="tabmenu1">방역</label>
-                <div class="tabCon">
-                    <p style="font-size:30px"><span style="background-color:#D1CECE; font-size:30px">중국(China)</span>
-                        <b>방역정책현황</b>
-                        ({{list_updatedate}} 기준)
-                    </p>
-                    <br><br><br>
-                    <br>• 코로나 19관련 국가별 방역정책 현황은 정보 제공을 목적으로 하며, 승객의 출입국을 보장하지 않습니다.
-                    <br>• 국가/지역별 정책현황이 수시로 변경되고 있음으로 아래 내용 또한 변경될 수 있습니다.<br><br><br>
-                    <table border="1" align="center" width="3000" height="180">
-                        <tr bgcolor="#FBC5A4" align="center">
-                            <td colspan="2">한국인 여행자 격리여부</td>
-                            <td rowspan="2">코로나 음성 확인서</td>
-                            <td rowspan="2">현지 코로나 검사 (접종완료자 기준)</td>
-                            <td rowspan="2">비고</td>
-                        </tr>
-                        <tr bgcolor="#FBC5A4" align="center">
-                            <td>접종완료자</td>
-                            <td>미접종자</td>
-                        </tr>
-                        <tr align="center">
-                            <td>{{list_vacci.1}}</td>
-                            <td>{{list_notvacci.1}}</td>
-                            <td>{{list_prov.1}}</td>
-                            <td>{{list_coronatest.1}}</td>
-                            <td>{{list_else.1}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
-                    <table border="1" align="center" width="1000" height="180">
-                        <tr bgcolor="#EEE5FF" align="center">
-                            <td>누적확진자</td>
-                            <td>신규확진자</td>
-                            <td>사망률(수)</td>
-                        </tr>
-                        <tr align="center">
-                            <td>000</td>
-                            <td>
-                                <script>
-                                    if (0)
-                                        document.write('<p><span style="color:red">000▲</span></p>');
-                                    else
-                                        document.write('<p><span style="color:red">-</span></p>');
-                                </script>
-                            </td>
-                            <td>000%<br>(000)</td>
-                        </tr>
-                    </table>
-                    <br><br>
-                    <table border="1" align="center" width="1000" height="180">
-                        <tr bgcolor="#D1F3FB" align="center">
-                            <td colspan="2">백신접종현황 (0.00 기준)</td>
-                        </tr>
-                        <tr bgcolor="#D1F3FB" align="center">
-                            <td>최소 1회 이상 접종</td>
-                            <td>접종 완료</td>
-                        </tr>
-                        <tr align="center">
-                            <td>00%<br><span style="color:blue">000</span></td>
-                            <td>00%<br><span style="color:blue">000</span></td>
-                        </tr>
-                    </table>
-                </div>
-
-            </li>
-            <li id="tab2" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu2">
-                <label for="tabmenu2">날씨</label>
-
-                <div class="tabCon">
-                    10 Day Weather
-
-                    <style type="text/css">
-                        .tg {
-                            border: none;
-                            border-collapse: collapse;
-                            border-color: #ccc;
-                            border-spacing: 0;
-                        }
-
-                        .tg td {
-                            background-color: #fff;
-                            border-color: #ccc;
-                            border-style: solid;
-                            border-width: 0px;
-                            color: #333;
-                            font-family: Arial, sans-serif;
-                            font-size: 14px;
-                            overflow: hidden;
-                            padding: 13px 20px;
-                            word-break: normal;
-                        }
-
-                        .tg th {
-                            background-color: #f0f0f0;
-                            border-color: #ccc;
-                            border-style: solid;
-                            border-width: 0px;
-                            color: #333;
-                            font-family: Arial, sans-serif;
-                            font-size: 14px;
-                            font-weight: normal;
-                            overflow: hidden;
-                            padding: 13px 20px;
-                            word-break: normal;
-                        }
-
-                        .tg .tg-6if2 {
-                            background-color: #c0c0c0;
-                            border-color: inherit;
-                            font-family: "Times New Roman", Times, serif !important;
-                            font-size: 24px;
-                            text-align: left;
-                            vertical-align: top
-                        }
-
-                        .tg .tg-kx6z {
-                            background-color: #ffffff;
-                            border-color: inherit;
-                            font-family: "Arial Black", Gadget, sans-serif !important;
-                            text-align: left;
-                            vertical-align: top
-                        }
-
-                        .tg .tg-c6of {
-                            background-color: #ffffff;
-                            border-color: inherit;
-                            text-align: left;
-                            vertical-align: top
-                        }
-
-                        .tg .tg-0pky {
-                            border-color: inherit;
-                            text-align: left;
-                            vertical-align: top
-                        }
-                    </style>
-                    <table class="tg">
-                        <thead>
-                            <tr>
-                                <th class="tg-6if2">Date</th>
-                                <th class="tg-6if2">temperatures</th>
-                                <th class="tg-6if2"></th>
-                                <th class="tg-6if2">rainfall</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="tg-c6of"> {{list_date.0}}</td>
-                                <td class="tg-c6of">{{list_temph.0}}°c/{{list_templ.0}}°c</td>
-                                <td class="tg-c6of"><img
-                                        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23feb02a' d='M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z'/%3e%3c/svg%3e"
-                                        alt="Image" width="30" height="30"></td>
-                                <td class="tg-kx6z">{{list_rain.0}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">
-                                    {{list_date.1}}
-                                </td>
-                                <td class="tg-0pky">{{list_temph.1}}°c/{{list_templ.1}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.1}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.2}}</td>
-                                <td class="tg-0pky">{{list_temph.2}}°c/{{list_templ.2}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.2}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.3}}</td>
-                                <td class="tg-0pky">{{list_temph.3}}°c/{{list_templ.3}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.3}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.4}}</td>
-                                <td class="tg-0pky">{{list_temph.4}}°c/{{list_templ.4}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.4}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.5}}</td>
-                                <td class="tg-0pky">{{list_temph.5}}°c/{{list_templ.5}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.5}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.6}}</td>
-                                <td class="tg-0pky">{{list_temph.6}}°c/{{list_templ.6}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.6}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.7}}</td>
-                                <td class="tg-0pky">{{list_temph.7}}°c/{{list_templ.7}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.7}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.8}}</td>
-                                <td class="tg-0pky">{{list_temph.8}}°c/{{list_templ.8}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.8}}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0pky">{{list_date.9}}</td>
-                                <td class="tg-0pky">{{list_temph.9}}°c/{{list_templ.9}}°c</td>
-                                <td class="tg-0pky"></td>
-                                <td class="tg-0pky">{{list_rain.9}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </li>
-            <li id="tab3" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu3">
-                <label for="tabmenu3">정보</label>
-                <div class="tabCon">
-
-                    <div id="wrap">
-                        <img src="https://picsum.photos/300/600">
-                        <div class="title">
-                            <h3>타이틀</h3>
-                            <p>부연설명</p>
-                            <a href="" class="more">MORE VIEW</a>
-                        </div>
-
-                    </div>
+<body style="background-color:#E0FEF7">
+        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbgUGmp%2FbtrDQzwnqAL%2FCbcdDbeg8ckJG0fMSBLeP1%2Fimg.png"
+                width=1500 height=200 alt="">
+        <br>
+        <div style="white-space: nowrap;">
+                <form method="POST" action="/info">
+                        <button type="button1" name="button" value="japan"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWhX7G%2FbtrDV1zd44w%2FBxyrXjii2IoSinB3v6pjK1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button2" name="button" value="china"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdwF0Qp%2FbtrDTRrCl9f%2FCGaK0JpKHEObPs8lJSunR0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button3" name="button" value="taiwan"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FNNBD1%2FbtrDVoIrT5L%2FQjAgzomiLppVZSBVkoKtq1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button4" name="button" value="hongkong"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fn73m1%2FbtrDVjmMn88%2FSGrso5vONkqQ2Tji6WQLy1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button5" name="button" value="vietnam"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSnhLX%2FbtrDUEeaNhz%2Fks0aIlB0oljW6MK4aVOWFK%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button6" name="button" value="singapore"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FsIqRw%2FbtrDTrNby40%2FUVJd82CmpGCG0r1YPIZwnK%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <br>
+                        <button type="button7" name="button" value="thailand"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbv4JoR%2FbtrDUWeCURu%2FopVEMUGR3RvFaHPYeY9Hw0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button8" name="button" value="malaysia"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdcxSQ3%2FbtrDUUA8y2p%2FrMddk5umkTcALFwTZadmK0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button9" name="button" value="laos"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDHVcU%2FbtrDUqN5cJS%2F098vFjxjUgcgOC5HhcvKrk%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button10" name="button" value="mongolia"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F5bScO%2FbtrDUPNh5Q0%2FRXWFd0DNiFrdmQyQZ5wvL0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button11" name="button" value="guam"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUdK2q%2FbtrDUOHBTEi%2FYtTkOKkkhwFeU6EhPmluV1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button12" name="button" value="saipan"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbspQoi%2FbtrDV43JIPa%2FODazNy6GSOPk49DVGD97Zk%2Fimg.png"
+                                        id="b1" alt=""></button>
+                </form>
+                <br><br><br>
+        </div>
+        <form method="POST" action="/info">
+                <div style=" text-align: center;">
+                        <a href="https://flyasiana.com/C/KR/KO/event/detail/CM202205120001636266"><img class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbUy7mg%2FbtrDWmSo406%2FmkQBHOZRM5kTuVpGzr3Si0%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a
+                                href="https://news.g-enews.com/ko-kr/news/article/news_all/2022060317260320773fee441970_1/article.html?md=20220605123807_S"><img
+                                        class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbaZpV0%2FbtrD5MV35zt%2FuHs7cUk5qBjXhVZOqxaz60%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://flyairseoul.com/CW/ko/eventView.do?seq=1365&type=I"><img class="sns-img"
+                                        width=150 height=150
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FccfqP8%2FbtrD2Iz7fT0%2F4QP6uLkROSQcQ0B1p7GOw0%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://flyasiana.com/C/KR/KO/event/detail/CM202204120001618795"><img class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdtY1RA%2FbtrDYdIlbdK%2FqE9N1n8hhHmkm8jr1idIn0%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://www.traveltimes.co.kr/news/articleView.html?idxno=401656"><img class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F4PXLH%2FbtrD1uuQ7HX%2F19T6RWemDW0dnimidMapgK%2Fimg.png"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://news.kmib.co.kr/article/view.asp?arcid=0017127150&code=61122020&cp=nv"><img
+                                        class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbLVmTL%2FbtrDWmY9eMt%2F4jCHykUUmZxpW7K59mGaZk%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://news.kbs.co.kr/news/view.do?ncd=5472681"><img class="sns-img" width=150
+                                        height=150
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FpzxYZ%2FbtrD5SveOnL%2FKaXnRmO1Fnk5kmUKeRFNk1%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://m.health.chosun.com/svc/news_view.html?contid=2022053101899"><img
+                                        class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGxo1t%2FbtrDZHBeQvh%2FZgCtOaEyEDEzwst6PuSP9K%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
 
                 </div>
 
-            </li>
-        </ul>
-    </div>
-    <!--tab-->
+        </form>
+
 </body>
 
 </html>
