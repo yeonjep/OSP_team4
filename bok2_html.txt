@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Youtube</title>
+</head>
+<body>
+   <h1> YouTube V-Log 5 ranks </h1>
+	{{title_rank}}
+	{{view_rank}}
+	{{link_rank}}
+</body>
+</html>
+
