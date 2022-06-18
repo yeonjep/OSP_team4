@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <title>
         {{list_vacci}}{{list_notvacci}}{{list_prov}}{{list_coronatest}}{{list_else}}{{list_updatedate}}
         {{list_date}}{{list_temph}}{{list_templ}}{{list_rain}}
@@ -165,7 +168,7 @@
                             <tr>
                                 <th class="tg-6if2">Date</th>
                                 <th class="tg-6if2">temperatures</th>
-                                <th class="tg-6if2"></th>
+
                                 <th class="tg-6if2">rainfall</th>
                             </tr>
                         </thead>
@@ -173,9 +176,6 @@
                             <tr>
                                 <td class="tg-c6of"> {{list_date.0}}</td>
                                 <td class="tg-c6of">{{list_temph.0}}°c/{{list_templ.0}}°c</td>
-                                <td class="tg-c6of"><img
-                                        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23feb02a' d='M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z'/%3e%3c/svg%3e"
-                                        alt="Image" width="30" height="30"></td>
                                 <td class="tg-kx6z">{{list_rain.0}}</td>
                             </tr>
                             <tr>
@@ -183,55 +183,55 @@
                                     {{list_date.1}}
                                 </td>
                                 <td class="tg-0pky">{{list_temph.1}}°c/{{list_templ.1}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.1}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.2}}</td>
                                 <td class="tg-0pky">{{list_temph.2}}°c/{{list_templ.2}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.2}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.3}}</td>
                                 <td class="tg-0pky">{{list_temph.3}}°c/{{list_templ.3}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.3}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.4}}</td>
                                 <td class="tg-0pky">{{list_temph.4}}°c/{{list_templ.4}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.4}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.5}}</td>
                                 <td class="tg-0pky">{{list_temph.5}}°c/{{list_templ.5}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.5}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.6}}</td>
                                 <td class="tg-0pky">{{list_temph.6}}°c/{{list_templ.6}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.6}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.7}}</td>
                                 <td class="tg-0pky">{{list_temph.7}}°c/{{list_templ.7}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.7}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.8}}</td>
                                 <td class="tg-0pky">{{list_temph.8}}°c/{{list_templ.8}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.8}}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0pky">{{list_date.9}}</td>
                                 <td class="tg-0pky">{{list_temph.9}}°c/{{list_templ.9}}°c</td>
-                                <td class="tg-0pky"></td>
+
                                 <td class="tg-0pky">{{list_rain.9}}</td>
                             </tr>
                         </tbody>
@@ -244,22 +244,40 @@
                 <label for="tabmenu3">정보</label>
                 <div class="tabCon">
 
-                    <div id="wrap">
-                        <img src="https://picsum.photos/300/600">
-                        <div class="title">
-                            <h3>타이틀</h3>
-                            <p>부연설명</p>
-                            <a href="" class="more">MORE VIEW</a>
-                        </div>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <!-- 1번 슬라이드입니다.<br>마우스로 움직여보세요. -->
 
+                            </div>
+                            <div class="swiper-slide">
+                                2번 슬라이드입니다.<br>
+                                레이아웃만 제대로 설정되어 있다면 슬라이드에 어떤 것이든 넣을 수 있습니다.
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://image.flaticon.com/icons/png/128/1933/1933588.png" alt=""><br>
+                                이렇게 이미지도 넣을 수 있습니다.
+                            </div>
+
+                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
+
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+
+                        <div class="swiper-scrollbar"></div>
                     </div>
 
+                    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
                 </div>
 
             </li>
         </ul>
     </div>
     <!--tab-->
+    <script src="static/js/youtube.js"></script>
 </body>
 
 </html>
