@@ -58,9 +58,80 @@ ul {
 #wrap {
     margin: 0 auto;
     text-align: center;
-    width: 300px;
+    width: 20px;
 }
 
+.outer {
+    border: 6px solid royalblue;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+.inner-list {
+    display: flex;
+    transition: .3s ease-out;
+    height: 100%;
+}
+
+.inner {
+    border: 6px solid olive;
+    padding: 0 16px;
+}
+
+.button-list {
+    text-align: center;
+}
+
+.instagram-media {
+    width: 200px !important;
+}
+
+center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.instangram-container {
+    width: 350px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 20px gray;
+    overflow: hidden;
+
+    position: relative;
+    margin: 30px;
+    /* delay 넣어주기 */
+    transition: 0.3s;
+}
+
+div.instangram-container:hover {
+    transform: translateY(-10px);
+}
+
+.swiper-container {
+    overflow: hidden;
+    display: flex;
+
+    /* display: block; */
+}
+
+
+
+.section::after {
+    content: "";
+    clear: both;
+    display: block;
+    justify-content: flex-end;
+}
+
+
+
+
+
+/* 
 .title {
     line-height: 1;
     color: red;
@@ -80,7 +151,7 @@ ul {
 .title p {
     font-size: 14px;
     margin-top: 15px;
-}
+} */
 
 .more {
     display: block;
@@ -88,16 +159,134 @@ ul {
     color: #fff;
     background: red;
     line-height: 40px;
-    width: 120px;
-    margin-top: 30px;
+    width: 220px;
+    margin-top: 10px;
     opacity: 0;
-    transition: 0.5s all
+    transition: 0.7s all;
+    pointer-events: none
 }
 
 #wrap:hover .more {
     opacity: 1
 }
 
-#wrap:hover .title {
-    top: 150px
+.more1 {
+    display: block;
+    font-size: 18x;
+    color: #fff;
+    background: red;
+    line-height: 40px;
+    width: 220px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: 0.7s all;
+    pointer-events: none
 }
+
+#wrap:hover .more1 {
+    opacity: 1
+}
+
+.more2 {
+    display: block;
+    font-size: 18x;
+    color: #fff;
+    background: red;
+    line-height: 40px;
+    width: 220px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: 0.7s all;
+    pointer-events: none
+}
+
+#wrap:hover .more2 {
+    opacity: 1
+}
+
+.more3 {
+    display: block;
+    font-size: 18x;
+    color: #fff;
+    background: red;
+    line-height: 40px;
+    width: 220px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: 0.7s all;
+    pointer-events: none
+}
+
+#wrap:hover .more3 {
+    opacity: 1
+}
+
+div.wrap2 {
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+    clear: both;
+    margin-top: auto;
+
+}
+
+footer {
+    /* background-color: red; */
+    width: 100%;
+    height: 110px;
+    bottom: 0px;
+    position: absolute;
+    clear: both;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+
+
+.more4 {
+    display: block;
+    font-size: 18x;
+    color: #fff;
+    background: red;
+    line-height: 40px;
+    width: 220px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: 0.7s all;
+    pointer-events: none
+}
+
+#wrap:hover .more4 {
+    opacity: 1
+}
+
+
+
+/* 유튜브 동영상 슬라이드 배너 넘기기 구현 */
+/* .outer {
+    border: 6px solid royalblue;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+.inner-list {
+    display: flex;
+    transition: .3s ease-out;
+    height: 100%;
+}
+
+.inner {
+    border: 6px solid olive;
+    padding: 0 16px;
+}
+
+.button-list {
+    text-align: center;
+} */
+
+/* #wrap:hover .title {
+    top: 150px
+} */
