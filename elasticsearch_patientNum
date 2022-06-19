@@ -1,0 +1,94 @@
+#!/usr/bin/python
+
+#-*- coding: utf-8 -*-
+
+import re
+import requests
+import sys
+
+from bs4 import BeautifulSoup
+from flask import Flask, render_template, request
+from elasticsearch import Elasticsearch
+
+app = Flask(__name__)
+
+def func(url):
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+    res1 = soup.find('table', class_='se-table-content')
+    body = res1.find_all('tr')
+    
+    global list_live_patient1
+    global list_sum_patient1
+    global list_death_rate1
+    global list_vaccinated1
+
+    list_live_patient = []
+    list_sum_patient = []
+    list_death_rate = []
+    list_vaccinated = []
+    
+    list_live_patient1 = []
+    list_sum_patient1 = []
+    list_death_rate1 = []
+    list_vaccinated1 = []
+
+    idx = 0
+    for i in body:
+        cnt = 0
+        idx = idx+1
+        if idx == 1:
+            continue
+        body1 = i.find_all('td')
+        for j in body1:
+            cnt = cnt+1
+            if cnt > 5:
+                break
+            if cnt == 1:
+                continue
+            elif cnt >= 2:
+                k = j.text.lstrip('\n')
+                k = k.rstrip('\n')
+                if cnt == 2:
+                    list_live_patient.append(k)
+                    continue
+                elif cnt == 3:
+                    list_sum_patient.append(k)
+                    continue
+                elif cnt == 4:
+                    list_death_rate.append(k)
+                    continue
+                elif cnt == 5:
+                    list_vaccinated.append(k)
+                    continue
+
+
+    e2={
+      "list_live_patient":list_live_patient,
+      "list_sum_patient":list_sum_patient,
+      "list_death_rate":list_death_rate,
+      "list_vaccinated":list_vaccinated
+       }
+                  
+    es_host="http://localhost:9200"      
+    es = Elasticsearch(es_host)
+   
+    es.index(index='patientnum', id=2, document=e2) 
+
+    data1 = es.search(index="patientnum", body={"query":{"match_all":{}}})
+    if data1['hits']['total']['value']>0:
+       for doc in data1['hits']['hits']:
+          data=doc['_source']
+          list_live_patient1=data['list_live_patient']
+          list_sum_patient1=data['list_sum_patient']
+          list_death_rate1=data['list_death_rate']
+          list_vaccinated1=data['list_vaccinated']
+
+@app.route('/')
+def home():
+   func("https://blog.naver.com/PostList.naver?blogId=sunju2629&from=postList&categoryNo=1")
+   return render_template("number.html", list1=list_live_patient1, list2=list_sum_patient1, list3=list_death_rate1, list4=list_vaccinated1)
+   
+      
+if __name__=='__main__':
+   app.run()
