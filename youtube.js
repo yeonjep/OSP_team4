@@ -19,6 +19,6 @@ var mySwiper = new Swiper('.swiper-container', {
 
     // 3초마다 자동으로 슬라이드가 넘어갑니다. 1초 = 1000
     autoplay: {
-        delay: 3000,
+        delay: 2200,
     },
 });
