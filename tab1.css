@@ -55,6 +55,7 @@ ul {
     display: block;
 }
 
+
 #wrap {
     margin: 0 auto;
     text-align: center;
@@ -132,7 +133,7 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
+    transition: 0.5s all;
     pointer-events: none;
 }
 
@@ -146,7 +147,7 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
+    transition: 0.5s all;
     pointer-events: none;
 }
 
@@ -161,7 +162,7 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
+    transition: 0.5s all;
     pointer-events: none;
 }
 
@@ -176,7 +177,7 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
+    transition: 0.5s all;
     pointer-events: none;
 }
 
@@ -189,7 +190,7 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
+    transition: 0.5s all;
     pointer-events: none;
 }
 
@@ -219,7 +220,6 @@ div.wrap2 {
     width: 100%;
     clear: both;
     margin-top: auto;
-
 }
 
 footer {
