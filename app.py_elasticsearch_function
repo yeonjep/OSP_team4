@@ -1,0 +1,408 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import sys
+from bs4 import BeautifulSoup 
+import re
+import requests
+import sys
+from elasticsearch import Elasticsearch
+
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk import word_tokenize
+import numpy
+import math
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+es_host="http://localhost:9200" 
+
+# weather
+
+def func_weather(url):
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+
+    global list_date
+    global list_rain
+    global list_high_temp_C
+    global list_low_temp_C
+    
+    res1 = soup.find_all(
+        'div', class_='DetailsSummary--DetailsSummary--2HluQ DetailsSummary--fadeOnOpen--vFCc_')
+
+    list_date1 = []
+    list_rain1 = []
+    list_high_temp_F = []
+    list_low_temp_F = []
+    list_high_temp_C = []
+    list_low_temp_C = []
+    
+    list_date = []
+    list_rain = []
+    list_high_temp_C = []
+    list_low_temp_C = []
+
+    cnt = 1
+    for idx in res1:
+        if (idx == None):
+            break
+        if (cnt == 11):
+            break
+        list_date1.append(idx.find('h3').text)
+        list_high_temp_F.append(
+            idx.find(class_='DetailsSummary--highTempValue--3Oteu').text)
+        list_low_temp_F.append(
+            idx.find(class_='DetailsSummary--lowTempValue--3H-7I').text)
+        tmp = idx.find('div', class_='DetailsSummary--precip--1ecIJ')
+        list_rain.append(tmp.find('span').text)
+        cnt = cnt+1
+        
+    for idx in list_high_temp_F:
+        if idx == "--":
+            list_high_temp_C.append(27)
+            continue
+        idx = ''.join(e for e in idx if e.isalnum())
+        i = float(idx)
+        tmp = (i-32)*5/9
+        tmp = int(tmp)
+        list_high_temp_C.append(tmp)
+
+    for idx in list_low_temp_F:
+        if idx == "--":
+            list_high_temp_C.append(27)
+            continue
+        idx = ''.join(e for e in idx if e.isalnum())
+        i = float(idx)
+        tmp = (i-32)*5/9
+        tmp = int(tmp)
+        list_low_temp_C.append(tmp)
+  
+    e2={
+      "date":list_date1,
+      "rain":list_rain1,
+      "high_temp":list_high_temp_C,
+      "low_temp":list_low_temp_C
+       }
+                  
+    es = Elasticsearch(es_host)
+   
+    es.index(index='weather', id=2, document=e2) 
+
+    
+    data1 = es.search(index="weather", body={"query":{"match_all":{}}})
+    if data1['hits']['total']['value']>0:
+       for doc in data1['hits']['hits']:
+          data=doc['_source']
+          list_date=data['date']
+          list_rain=data['rain']
+          list_high_temp_C=data['high_temp']
+          list_low_temp_C=data['low_temp']
+          
+# covid
+
+def func_covid(url):
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, "html.parser")
+
+    global list1
+    global list2
+    global list3
+    global list4
+    global list5
+    global result_print
+    
+    res1 = soup.find_all('div', class_='contTit')
+    i = 1
+    for idx in res1:
+        if (i == 2):
+            res2 = idx.text
+            break
+        i = i+1
+        
+    result_tmp = []
+    index = -1
+    for idx in res2:
+        index = index+1
+        if (index < 17):
+            continue
+        elif (index > 23):
+            break
+        else:
+            result_tmp.append(idx)
+
+    result_print1 = ''.join(result_tmp)
+
+    tb = soup.find('table', class_='lineTop_tb2')
+    tb1 = tb.find('tbody')
+
+
+    list1 = []
+    list2 = []
+    list3 = []
+    list4 = []
+    list5 = []
+    
+    list11 = []
+    list21 = []
+    list31 = []
+    list41 = []
+    list51 = []
+
+    for link in tb1.find_all('tr'):
+        name = link.find_all('td')
+        if (name == None):
+            break
+        cnt = 0
+        for a in name:
+            if(cnt == 0):
+                list11.append(a.text)
+            elif(cnt == 1):
+                list21.append(a.text)
+            elif(cnt == 2):
+                list31.append(a.text)
+            elif(cnt == 3):
+                list41.append(a.text)
+            elif(cnt == 4):
+                list51.append(a.text)
+
+            cnt = cnt+1    
+   
+    e1={
+      "list1":list11,
+      "list2":list21,
+      "list3":list31,
+      "list4":list41,
+      "list5":list51,
+      "result_print":result_print1
+       }
+                  
+    es = Elasticsearch(es_host)
+   
+    es.index(index='covid', id=1, document=e1)      
+    
+    data1 = es.search(index="covid", body={"query":{"match_all":{}}})
+    if data1['hits']['total']['value']>0:
+       for doc in data1['hits']['hits']:
+          data=doc['_source']
+          list1=data['list1']
+          list2=data['list2']
+          list3=data['list3']
+          list4=data['list4']   
+          list5=data['list5'] 
+          result_print=data['result_print']
+
+          
+#frequency analysis
+word_d = {}
+sent_list = []
+
+def process_new_sentence(s):
+    sent_list.append(s)
+    tokenized = word_tokenize(s)
+    for word in tokenized:
+        if word not in word_d.keys():
+            word_d[word] = 0
+        word_d[word] += 1
+        
+def compute_tf(s):
+    bow = set()
+    # dictionary for words in the given sentence (document)
+    wordcount_d = {} 
+
+    tokenized = word_tokenize(s)
+    for tok in tokenized:
+        if tok not in wordcount_d.keys():
+            wordcount_d[tok]=0
+        wordcount_d[tok] += 1
+        bow.add(tok)
+
+    tf_d = {}
+    for word,count in wordcount_d.items():
+        tf_d[word] = count/float(len(bow))
+    
+    return tf_d
+    
+def compute_idf():
+    Dval = len(sent_list)
+    # build set of words
+    bow = set()
+
+    for i in range(0, len(sent_list)):
+        tokenized = word_tokenize(sent_list[i])
+        for tok in tokenized:
+            bow.add(tok)
+
+    idf_d = {}
+    for t in bow:
+        cnt = 0
+        for s in sent_list:
+            if t in word_tokenize(s):
+                cnt += 1
+        idf_d[t] = math.log(Dval/float(cnt))
+    return idf_d
+    
+def Youtuber_func(name):
+    global res1
+    global freq
+    global res2
+    
+    freq={}
+    
+    #insert youtuber name      
+    global original
+    original=[]
+
+    data0 = es.search(index="youtuber", body={"query":{"match_all":{}}})
+    if es.indices.exists(index='youtuber'):
+    #put original data into original(list)
+       for doc in data0['hits']['hits']:
+          data=doc['_source']
+          original=list(data['name'])
+       original.append(name)
+       e3={
+          "name":original
+       }
+    else:
+       e3={
+          "name":name
+       }
+    es = Elasticsearch(es_host)
+    es.index(index='youtuber', id=2, document=e3)   
+    
+    data1 = es.search(index="youtuber", body={"query":{"match_all":{}}})
+    if data1['hits']['total']['value']>0:
+       for doc in data1['hits']['hits']:
+          data=doc['_source']
+          res1=data['name']
+         
+    #data analysis
+    for i in res1:
+        process_new_sentence(i)
+
+    idf_d = compute_idf()
+    for i in range(0, len(sent_list)):
+        tf_d = compute_tf(sent_list[i])
+        for word,tfval in tf_d.items():
+            freq[word]= tfval*idf_d[word]
+
+    e2={
+        "name":original,
+        "freq":freq
+    }
+    
+    es.index(index='youtuber', id=2, document=e2)   
+    
+    data2 = es.search(index="youtuber", body={"query":{"match_all":{}}})
+    if data2['hits']['total']['value']>0:
+       for doc in data2['hits']['hits']:
+          data=doc['_source']
+          res2=data['freq']  
+    global resultt     
+    resultt = sorted(res2, key=lambda x : res2[x])
+    resultt=resultt[:5]   
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+    
+@app.route('/youtuber', methods=['POST'])
+def infor():
+   mode=request.form['youtuber']
+   x=requests.utils.unquote(mode)
+   Youtuber_func(mode)
+   return render_template("ela.html", resuult=resultt)
+
+@app.route('/info', methods=['POST'])
+def info():
+    mode = request.form.get('button')
+    if mode == 'japan':
+        func_weather(
+            "https://weather.com/weather/tenday/l/4ba28384e2da53b2861f5b5c70b7332e4ba1dc83e75b948e6fbd2aaceeeceae3")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_japan.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'china':
+        func_weather(
+            "https://weather.com/weather/tenday/l/71ca347e2948ee9490525aa5433fa91da6973ae51ea0f765fbe8e85b9f16c5df")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_china.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'taiwan':
+        func_weather(
+            "https://weather.com/weather/tenday/l/fe7393b7f2c8eed2cf692bd079361df362d9f0c1c0f896e6e46a649295e15c7d")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_taiwan.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'hongkong':
+        func_weather(
+            "https://weather.com/weather/tenday/l/8f0658124f5f5b725ca5ed254decc028fd2099a8ac1843faa2ceb206c9b464d1")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_hongkong.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'vietnam':
+        func_weather(
+            "https://weather.com/weather/tenday/l/e09d58707a823303a77d65888f867fbe34d5d80ab1e7983a17461491a84474eb")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_vietnam.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'singapore':
+        func_weather(
+            "https://weather.com/weather/tenday/l/7b1c4499e4bd335aed1f686d965ea106d29c9c288d68ec4596b1a1e8535640ba")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_singapore.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'thailand':
+        func_weather(
+            "https://weather.com/weather/tenday/l/61d235a12c8f0b158c472bb5cf4a6a2d17b42270c214e7285c48666e57f21864")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_thailand.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'malaysia':
+        func_weather(
+            "https://weather.com/weather/tenday/l/260bed6e5564853312a896b040219099674310ce4eb01f31c8526a9bd9b49a7c")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_malaysia.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'laos':
+        func_weather(
+            "https://weather.com/weather/tenday/l/9d4759220510346ac9b159414847e95a8858a58f5a578eef3c0ea278e37d519f")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_laos.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'mongolia':
+        func_weather(
+            "https://weather.com/weather/tenday/l/9d9745e1ca6a26b6879d3f52d495c06928f97395bce865e655265d054391da4e")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_mongolia.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+    elif mode == 'guam':
+        func_weather(
+            "https://weather.com/weather/tenday/l/fa9f819c190d7ab04ad7bbd2e1ada726637098fda80935a9d623672b84aea1d6")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_guam.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+    elif mode == 'saipan':
+        func_weather(
+            "https://weather.com/weather/tenday/l/433a68edb169672f4079ddfaf42f2b2fc83c8c22bb2837521047f00958bf00a6")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        return render_template("tabmenu_saipan.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print)
+
+
+
+if __name__ == '__main__':
+    app.run()
