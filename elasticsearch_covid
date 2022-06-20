@@ -103,7 +103,6 @@ def func_covid(url):
           list5=data['list5'] 
           result_print=data['result_print']
          
-
 @app.route('/')
 def home():
    func_covid("https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
