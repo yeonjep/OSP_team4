@@ -11,29 +11,29 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-def func(url):
+def func_weather(url):
     res = requests.get(url)
     soup = BeautifulSoup(res.content, "html.parser")
 
-    global list_date1
-    global list_rain1
-    global list_high_temp_C1
-    global list_low_temp_C1
+    global list_date
+    global list_rain
+    global list_high_temp_C
+    global list_low_temp_C
     
     res1 = soup.find_all(
         'div', class_='DetailsSummary--DetailsSummary--2HluQ DetailsSummary--fadeOnOpen--vFCc_')
 
-    list_date = []
-    list_rain = []
+    list_date1 = []
+    list_rain1 = []
     list_high_temp_F = []
     list_low_temp_F = []
     list_high_temp_C = []
     list_low_temp_C = []
     
-    list_date1 = []
-    list_rain1 = []
-    list_high_temp_C1 = []
-    list_low_temp_C1 = []
+    list_date = []
+    list_rain = []
+    list_high_temp_C = []
+    list_low_temp_C = []
 
     cnt = 1
     for idx in res1:
@@ -41,7 +41,7 @@ def func(url):
             break
         if (cnt == 11):
             break
-        list_date.append(idx.find('h3').text)
+        list_date1.append(idx.find('h3').text)
         list_high_temp_F.append(
             idx.find(class_='DetailsSummary--highTempValue--3Oteu').text)
         list_low_temp_F.append(
@@ -71,8 +71,8 @@ def func(url):
         list_low_temp_C.append(tmp)
   
     e2={
-      "date":list_date,
-      "rain":list_rain,
+      "date":list_date1,
+      "rain":list_rain1,
       "high_temp":list_high_temp_C,
       "low_temp":list_low_temp_C
        }
@@ -87,15 +87,15 @@ def func(url):
     if data1['hits']['total']['value']>0:
        for doc in data1['hits']['hits']:
           data=doc['_source']
-          list_date1=data['date']
-          list_rain1=data['rain']
-          list_high_temp_C1=data['high_temp']
-          list_low_temp_C1=data['low_temp']
+          list_date=data['date']
+          list_rain=data['rain']
+          list_high_temp_C=data['high_temp']
+          list_low_temp_C=data['low_temp']
          
 @app.route('/')
 def home():
-   func("https://weather.com/weather/tenday/l/4ba28384e2da53b2861f5b5c70b7332e4ba1dc83e75b948e6fbd2aaceeeceae3")
-   return render_template("test2.html", list1=list_date1, list2=list_rain1, list3=list_high_temp_C1, list4=list_low_temp_C1)
+   func_weather("https://weather.com/weather/tenday/l/4ba28384e2da53b2861f5b5c70b7332e4ba1dc83e75b948e6fbd2aaceeeceae3")
+   return render_template("test2.html", list1=list_date, list2=list_rain, list3=list_high_temp_C, list4=list_low_temp_C)
    
       
 if __name__=='__main__':
