@@ -466,13 +466,21 @@ def info():
         func_number("https://blog.naver.com/PostList.naver?blogId=sunju2629&from=postList&categoryNo=1")
         return render_template("tabmenu_malaysia.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print, list_live_patient=list_live_patient, list_sum_patient=list_sum_patient, list_death_rate=list_death_rate, list_vaccinated=list_vaccinated)
 
+    elif mode == 'mongolia':
+        func_weather(
+            "https://weather.com/weather/tenday/l/348a814ea6bfcb894d69d68794ed2708618e351117cc351261fbedeec0aaa4fa")
+        func_covid(
+            "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+        func_number("https://blog.naver.com/PostList.naver?blogId=sunju2629&from=postList&categoryNo=1")
+        return render_template("tabmenu_mongolia.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print, list_live_patient=list_live_patient, list_sum_patient=list_sum_patient, list_death_rate=list_death_rate, list_vaccinated=list_vaccinated)
+
     elif mode == 'laos':
         func_weather(
             "https://weather.com/weather/tenday/l/9d4759220510346ac9b159414847e95a8858a58f5a578eef3c0ea278e37d519f")
         func_covid(
             "https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
         func_number("https://blog.naver.com/PostList.naver?blogId=sunju2629&from=postList&categoryNo=1")
-        return render_template("tabmenu_laos.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print, list_lilist_live_patient=list_live_patient, list_sum_patient=list_sum_patient, list_death_rate=list_death_rate, list_vaccinated=list_vaccinated)
+        return render_template("tabmenu_laos.html", list_date=list_date, list_rain=list_rain, list_temph=list_high_temp_C, list_templ=list_low_temp_C, list_vacci=list1, list_notvacci=list2, list_prov=list3, list_coronatest=list4, list_else=list5, list_updatedate=result_print, list_live_patient=list_live_patient, list_sum_patient=list_sum_patient, list_death_rate=list_death_rate, list_vaccinated=list_vaccinated)
 
     elif mode == 'guam':
         func_weather(
