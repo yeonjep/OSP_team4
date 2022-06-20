@@ -11,7 +11,13 @@
                         width: 229.5px;
                         height: 150px;
                 }
+
+                #b2 {
+                        width: 10px;
+                        height: 10px;
+                }
         </style>
+        
 </head>
 
 <body style="background-color:#464c51">
@@ -22,7 +28,7 @@
         </div>
         <br><br>
 
-        <div style="white-space: nowrap;">
+        <div style="white-space: nowrap; text-align: center;">
                 <form method="POST" action="/info">
                         <button type="button1" name="button" value="japan"><img
                                         src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWhX7G%2FbtrDV1zd44w%2FBxyrXjii2IoSinB3v6pjK1%2Fimg.png"
@@ -64,10 +70,22 @@
                 </form>
                 <br><br><br>
         </div>
+
+
+        <!-- 검색창 -->
+        <div class="searchEngine" style=" text-align: center;">           
+            <form method="POST" action="/youtuber">
+                Youtuber <input name="youtuber" type="text">
+                <input type="submit" value="Submit"> 
+            </form>        
+        </div>
+        <!-- 검색창 여기까지 -->
+
         <div style=" text-align: center;">
                 카드뉴스
-                <br>
+
         </div>
+        <br>
         <form method="POST" action="/info">
                 <div style=" text-align: center;">
                         <a href="https://flyasiana.com/C/KR/KO/event/detail/CM202205120001636266"><img class="sns-img"
@@ -106,8 +124,8 @@
         </form>
         <br><br>
         <hr>
-        <br>
-        <div class="wrap2">
+        <!-- <br> -->
+        <div class="wrap2" style=" text-align: center;">
                 <footer>
                         <nav>
                                 <!-- footer -->
@@ -122,6 +140,7 @@
 
         <br><br>
 
+        <script src="static/js/searchtab.js"></script>
 </body>
 
 </html>
