@@ -116,11 +116,17 @@ def func_ytube(site):
     for i in range(5):
     	link_rank1.append(link_col[i])
     	
-    	
+    link_rank2=[]
+    tmp=[]
+    for i in link_rank1:
+    	tmp=i.split('watch?v=')
+    	str=tmp[0]+'embed/'+tmp[1]
+    	link_rank2.append(str)
+   	
     e1={
       "title":title_rank1,
       "view":view_rank1,
-      "link":link_rank1
+      "link":link_rank2
        }
                   
     es_host="http://localhost:9200"      
