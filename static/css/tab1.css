@@ -11,9 +11,9 @@ ul {
 
 .tabmenu {
     max-width: 3000px;
+    
     margin: 0 auto;
     position: relative;
-
 }
 
 .tabmenu ul li {
@@ -42,7 +42,7 @@ ul {
     position: absolute;
     left: 0;
     top: 40px;
-    width: 1515px;
+    width: 100%;
     box-sizing: border-box;
     border: 5px solid #f9f9f9;
 }
@@ -55,11 +55,13 @@ ul {
     display: block;
 }
 
+
 #wrap {
     margin: 0 auto;
     text-align: center;
     width: 20px;
 }
+
 
 .outer {
     border: 6px solid royalblue;
@@ -114,44 +116,13 @@ div.instangram-container:hover {
 .swiper-container {
     overflow: hidden;
     display: flex;
-
-    /* display: block; */
-}
-
-
-
-.section::after {
-    content: "";
-    clear: both;
     display: block;
-    justify-content: flex-end;
 }
 
-
-
-
-
-/* 
-.title {
-    line-height: 1;
-    color: red;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 200px;
-    height: 120px;
-    transition: 0.5s all
+.instangram-container {
+    margin: 0px;
+    padding: 0px;
 }
-
-.title h3 {
-    font-size: 30px;
-    margin: 0
-}
-
-.title p {
-    font-size: 14px;
-    margin-top: 15px;
-} */
 
 .more {
     display: block;
@@ -162,13 +133,10 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
-    pointer-events: none
+    transition: 0.5s all;
+    pointer-events: none;
 }
 
-#wrap:hover .more {
-    opacity: 1
-}
 
 .more1 {
     display: block;
@@ -179,13 +147,11 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
-    pointer-events: none
+    transition: 0.5s all;
+    pointer-events: none;
 }
 
-#wrap:hover .more1 {
-    opacity: 1
-}
+
 
 .more2 {
     display: block;
@@ -196,13 +162,11 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
-    pointer-events: none
+    transition: 0.5s all;
+    pointer-events: none;
 }
 
-#wrap:hover .more2 {
-    opacity: 1
-}
+
 
 .more3 {
     display: block;
@@ -213,11 +177,40 @@ div.instangram-container:hover {
     width: 220px;
     margin-top: 10px;
     opacity: 0;
-    transition: 0.7s all;
-    pointer-events: none
+    transition: 0.5s all;
+    pointer-events: none;
 }
 
-#wrap:hover .more3 {
+.more4 {
+    display: block;
+    font-size: 18x;
+    color: #fff;
+    background: red;
+    line-height: 40px;
+    width: 220px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: 0.5s all;
+    pointer-events: none;
+}
+
+#wrap:hover .more {
+    opacity: 1
+}
+
+#wrap1:hover .more1 {
+    opacity: 1
+}
+
+#wrap2:hover .more2 {
+    opacity: 1
+}
+
+#wrap3:hover .more3 {
+    opacity: 1
+}
+
+#wrap4:hover .more4 {
     opacity: 1
 }
 
@@ -227,7 +220,6 @@ div.wrap2 {
     width: 100%;
     clear: both;
     margin-top: auto;
-
 }
 
 footer {
@@ -241,52 +233,3 @@ footer {
     flex-direction: column;
     margin-top: auto;
 }
-
-
-
-.more4 {
-    display: block;
-    font-size: 18x;
-    color: #fff;
-    background: red;
-    line-height: 40px;
-    width: 220px;
-    margin-top: 10px;
-    opacity: 0;
-    transition: 0.7s all;
-    pointer-events: none
-}
-
-#wrap:hover .more4 {
-    opacity: 1
-}
-
-
-
-/* 유튜브 동영상 슬라이드 배너 넘기기 구현 */
-/* .outer {
-    border: 6px solid royalblue;
-    width: 300px;
-    height: 200px;
-    margin: 0 auto;
-    overflow-x: hidden;
-}
-
-.inner-list {
-    display: flex;
-    transition: .3s ease-out;
-    height: 100%;
-}
-
-.inner {
-    border: 6px solid olive;
-    padding: 0 16px;
-}
-
-.button-list {
-    text-align: center;
-} */
-
-/* #wrap:hover .title {
-    top: 150px
-} */
