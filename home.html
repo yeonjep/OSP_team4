@@ -1,11 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>East Asia Traveling for Korea</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>East Asia Traveling for Korea</title>
+        <style>
+                #b1 {
+                        width: 229.5px;
+                        height: 150px;
+                }
+
+                #b2 {
+                        width: 10px;
+                        height: 10px;
+                }
+        </style>
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}"> -->
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='js/searchtab.js') }}"> -->
+
 </head>
-<body>
+
+<body style="background-color:#464c51">
+        <div style=" text-align: center;">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzVSTd%2FbtrE7Dj0X2e%2FLRslA9Gi5lk3YOeEIOKw50%2Fimg.png"
+                        width=1520 height=180 alt="">
+                <br>
+        </div>
+        <br><br>
+
+        <div style="white-space: nowrap; text-align: center;">
+                <form method="POST" action="/info">
+                        <button type="button1" name="button" value="japan"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWhX7G%2FbtrDV1zd44w%2FBxyrXjii2IoSinB3v6pjK1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button2" name="button" value="china"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdwF0Qp%2FbtrDTRrCl9f%2FCGaK0JpKHEObPs8lJSunR0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button3" name="button" value="taiwan"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FNNBD1%2FbtrDVoIrT5L%2FQjAgzomiLppVZSBVkoKtq1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button4" name="button" value="hongkong"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fn73m1%2FbtrDVjmMn88%2FSGrso5vONkqQ2Tji6WQLy1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button5" name="button" value="vietnam"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSnhLX%2FbtrDUEeaNhz%2Fks0aIlB0oljW6MK4aVOWFK%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button6" name="button" value="singapore"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FsIqRw%2FbtrDTrNby40%2FUVJd82CmpGCG0r1YPIZwnK%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <br>
+                        <button type="button7" name="button" value="thailand"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbv4JoR%2FbtrDUWeCURu%2FopVEMUGR3RvFaHPYeY9Hw0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button8" name="button" value="malaysia"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdcxSQ3%2FbtrDUUA8y2p%2FrMddk5umkTcALFwTZadmK0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button9" name="button" value="laos"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDHVcU%2FbtrDUqN5cJS%2F098vFjxjUgcgOC5HhcvKrk%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button10" name="button" value="mongolia"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F5bScO%2FbtrDUPNh5Q0%2FRXWFd0DNiFrdmQyQZ5wvL0%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button11" name="button" value="guam"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUdK2q%2FbtrDUOHBTEi%2FYtTkOKkkhwFeU6EhPmluV1%2Fimg.png"
+                                        id="b1" alt=""></button>
+                        <button type="button12" name="button" value="saipan"><img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbspQoi%2FbtrDV43JIPa%2FODazNy6GSOPk49DVGD97Zk%2Fimg.png"
+                                        id="b1" alt=""></button>
+                </form>
+                <br><br><br>
+        </div>
+
+
+        <!-- 검색창 -->
+        <div class="searchEngine" style=" text-align: center;">           
+            <form method="POST" action="/youtuber">
+                Youtuber <input name="youtuber" type="text">
+                <input type="submit" value="Submit"> 
+            </form>        
+        </div>
+        <!-- 검색창 여기까지 -->
+
+        <div style=" text-align: center;">
+                카드뉴스
+
+        </div>
+        <br>
+        <form method="POST" action="/info">
+                <div style=" text-align: center;">
+                        <a href="https://flyasiana.com/C/KR/KO/event/detail/CM202205120001636266"><img class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbUy7mg%2FbtrDWmSo406%2FmkQBHOZRM5kTuVpGzr3Si0%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a
+                                href="https://news.g-enews.com/ko-kr/news/article/news_all/2022060317260320773fee441970_1/article.html?md=20220605123807_S"><img
+                                        class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbaZpV0%2FbtrD5MV35zt%2FuHs7cUk5qBjXhVZOqxaz60%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://flyairseoul.com/CW/ko/eventView.do?seq=1365&type=I"><img class="sns-img"
+                                        width=150 height=150
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FccfqP8%2FbtrD2Iz7fT0%2F4QP6uLkROSQcQ0B1p7GOw0%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://flyasiana.com/C/KR/KO/event/detail/CM202204120001618795"><img class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdtY1RA%2FbtrDYdIlbdK%2FqE9N1n8hhHmkm8jr1idIn0%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://www.traveltimes.co.kr/news/articleView.html?idxno=401656"><img class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F4PXLH%2FbtrD1uuQ7HX%2F19T6RWemDW0dnimidMapgK%2Fimg.png"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://news.kmib.co.kr/article/view.asp?arcid=0017127150&code=61122020&cp=nv"><img
+                                        class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbLVmTL%2FbtrDWmY9eMt%2F4jCHykUUmZxpW7K59mGaZk%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://news.kbs.co.kr/news/view.do?ncd=5472681"><img class="sns-img" width=150
+                                        height=150
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FpzxYZ%2FbtrD5SveOnL%2FKaXnRmO1Fnk5kmUKeRFNk1%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+                        <a href="https://m.health.chosun.com/svc/news_view.html?contid=2022053101899"><img
+                                        class="sns-img"
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGxo1t%2FbtrDZHBeQvh%2FZgCtOaEyEDEzwst6PuSP9K%2Fimg.jpg"
+                                        width=150 height=150 alt=""></a>
+
+                </div>
+
+        </form>
+        <br><br>
+        <hr>
+        <!-- <br> -->
+        <div class="wrap2" style=" text-align: center;">
+                <footer>
+                        <nav>
+                                <!-- footer -->
+                        </nav>
+                        <p>
+                                <span>저자 : yeonjePark suminLee seonjuHong jihunPark</span><br>
+                                <span>이메일 : yeonje1004@knu.ac.kr lsmlsm426@knu.ac.kr dasoni18118@gmail.com</span><br>
+                                <span>© 2022 East Asia Traveling. </span>
+                        </p>
+                </footer>
+        </div>
+
+        <br><br>
+
+        <script src="static/js/searchtab.js"></script>
 </body>
+
 </html>
