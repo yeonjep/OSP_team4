@@ -63,7 +63,7 @@ def func_weather(url):
         list_low_temp_F.append(
             idx.find(class_='DetailsSummary--lowTempValue--3H-7I').text)
         tmp = idx.find('div', class_='DetailsSummary--precip--1ecIJ')
-        list_rain.append(tmp.find('span').text)
+        list_rain1.append(tmp.find('span').text)
         cnt = cnt+1
         
     for idx in list_high_temp_F:
