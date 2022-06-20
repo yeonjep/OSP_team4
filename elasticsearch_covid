@@ -11,16 +11,16 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-def func(url):
+def func_covid(url):
     res = requests.get(url)
     soup = BeautifulSoup(res.content, "html.parser")
 
-    global list11
-    global list21
-    global list31
-    global list41
-    global list51
-    global res21
+    global list1
+    global list2
+    global list3
+    global list4
+    global list5
+    global result_print
     
     res1 = soup.find_all('div', class_='contTit')
     i = 1
@@ -29,6 +29,19 @@ def func(url):
             res2 = idx.text
             break
         i = i+1
+        
+    result_tmp = []
+    index = -1
+    for idx in res2:
+        index = index+1
+        if (index < 17):
+            continue
+        elif (index > 23):
+            break
+        else:
+            result_tmp.append(idx)
+
+    result_print1 = ''.join(result_tmp)
 
     tb = soup.find('table', class_='lineTop_tb2')
     tb1 = tb.find('tbody')
@@ -53,25 +66,25 @@ def func(url):
         cnt = 0
         for a in name:
             if(cnt == 0):
-                list1.append(a.text)
+                list11.append(a.text)
             elif(cnt == 1):
-                list2.append(a.text)
+                list21.append(a.text)
             elif(cnt == 2):
-                list3.append(a.text)
+                list31.append(a.text)
             elif(cnt == 3):
-                list4.append(a.text)
+                list41.append(a.text)
             elif(cnt == 4):
-                list5.append(a.text)
+                list51.append(a.text)
 
             cnt = cnt+1    
    
     e1={
-      "list1":list1,
-      "list2":list2,
-      "list3":list3,
-      "list4":list4,
-      "list5":list5,
-      "res2":res2
+      "list1":list11,
+      "list2":list21,
+      "list3":list31,
+      "list4":list41,
+      "list5":list51,
+      "result_print":result_print1
        }
                   
     es_host="http://localhost:9200"      
@@ -83,18 +96,18 @@ def func(url):
     if data1['hits']['total']['value']>0:
        for doc in data1['hits']['hits']:
           data=doc['_source']
-          list11=data['list1']
-          list21=data['list2']
-          list31=data['list3']
-          list41=data['list4']   
-          list51=data['list5'] 
-          res21=data['res2']
+          list1=data['list1']
+          list2=data['list2']
+          list3=data['list3']
+          list4=data['list4']   
+          list5=data['list5'] 
+          result_print=data['result_print']
          
 
 @app.route('/')
 def home():
-   func("https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
-   return render_template("test.html", list1=list11, list2=list21, list3=list31, list4=list41, list5=list51, res2=res21)
+   func_covid("https://www.airport.co.kr/www/cms/frCon/index.do?MENU_ID=2600")
+   return render_template("test.html", list1=list1, list2=list2, list3=list3, list4=list4, list5=list5, res2=result_print)
    
       
 if __name__=='__main__':
