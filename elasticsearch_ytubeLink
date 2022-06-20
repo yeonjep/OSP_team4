@@ -4,7 +4,7 @@
 import sys
 from selenium import webdriver as wb
 from selenium.webdriver.common.keys import Keys
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 import pandas as pd
 import time
 import re
@@ -32,7 +32,7 @@ def func_ytube(site):
         body.send_keys(Keys.PAGE_DOWN)
         time.sleep(0.5)
 
-    soup = bs(driver.page_source, 'lxml')
+    soup = BeautifulSoup(driver.page_source, 'lxml')
 
     title = soup.select('a#video-title')
     soup.select('span.style-scope.ytd-video-meta-block')
@@ -99,32 +99,28 @@ def func_ytube(site):
     view_col = df['views'].tolist()
     link_col = df['link'].tolist()
     
+    title_rank1 = []
+    view_rank1 = []
+    link_rank1 = []
+    
     title_rank = []
     view_rank = []
     link_rank = []
     
     for i in range(5):
-    	title_rank.append(title_col[i])
+    	title_rank1.append(title_col[i])
     	
     for i in range(5):
-    	view_rank.append(view_col[i])
+    	view_rank1.append(view_col[i])
     	
     for i in range(5):
-    	link_rank.append(link_col[i])
+    	link_rank1.append(link_col[i])
     	
     	
-    global title_rank1
-    global view_rank1
-    global link_rank1
-    	
-    title_rank1 = []
-    view_rank1 = []
-    link_rank1 = []
-    
     e1={
-      "title":title_rank,
-      "view":view_rank,
-      "link":link_rank
+      "title":title_rank1,
+      "view":view_rank1,
+      "link":link_rank1
        }
                   
     es_host="http://localhost:9200"      
@@ -136,14 +132,14 @@ def func_ytube(site):
     if data1['hits']['total']['value']>0:
        for doc in data1['hits']['hits']:
           data=doc['_source']
-          title_rank1=data['title']
-          view_rank1=data['view']
-          link_rank1=data['link']    
+          title_rank=data['title']
+          view_rank=data['view']
+          link_rank=data['link']    
     	 
 @app.route('/')
 def home():
     func_ytube("https://www.youtube.com/results?search_query=%EC%9D%BC%EB%B3%B8%EB%B8%8C%EC%9D%B4%EB%A1%9C%EA%B7%B8")
-    return render_template("bok3.html", title_rank=title_rank1, view_rank=view_rank1,link_rank=link_rank1)
+    return render_template("bok3.html", title_rank=title_rank, view_rank=view_rank,link_rank=link_rank)
 
 if __name__ == '__main__':
     app.run()
